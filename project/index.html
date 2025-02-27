@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="nuclearSense - Integrating advanced sensors, IoT platforms, and data analytics for real-time insights." />
+  <meta name="keywords" content="nuclearSense, IoT, ThingsBoard, Dewesoft, Petasense, industrial IoT, predictive analytics, smart cities, renewable energy" />
+  <title>nuclearSense | Unified IoT Monitoring Platform</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Font Awesome (for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" 
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background: #fff;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 0.5em;
+      color: #111;
+    }
+    p {
+      margin-bottom: 1em;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    /* Accent color for branding and highlights */
+    :root {
+      --accent: #2196F3;
+    }
+    /* Header / Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--accent);
+      color: #fff;
+      z-index: 1000;
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5em;
+      font-weight: 600;
+      padding: 10px 0;
+    }
+    nav {
+      position: relative;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+    .nav-links li {
+      margin: 0 15px;
+    }
+    .nav-links a {
+      color: #fff;
+      padding: 8px 5px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .nav-links a:hover {
+      border-color: #fff;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.5em;
+      cursor: pointer;
+      padding: 5px;
+    }
+    /* Hero Section */
+    #home {
+      background: linear-gradient(135deg, var(--accent) 0%, #000 100%);
+      color: #fff;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 20px;
+    }
+    #home h1 {
+      font-size: 3em;
+      margin-bottom: 0.5em;
+    }
+    #home p {
+      font-size: 1.2em;
+      margin-bottom: 1em;
+      max-width: 600px;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 30px;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #1976d2; /* slightly darker blue */
+    }
+    /* Section common styling */
+    section {
+      padding: 60px 20px;
+    }
+    section:not(#home) {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: none;
+    }
+    /* Alternate section backgrounds for contrast */
+    #about, #architecture, #industries {
+      background: #fff;
+    }
+    #product, #pricing, #contact {
+      background: #f9f9f9;
+    }
+    /* About Section */
+    #about h2 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    #about .container p {
+      max-width: 800px;
+      margin: 0 auto 1em auto;
+    }
+    #about .values {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 30px;
+    }
+    #about .values > div {
+      flex: 1 1 300px;
+    }
+    #about .values h3 {
+      font-size: 1.3em;
+      margin-bottom: 0.5em;
+      color: var(--accent);
+    }
+    /* Product Section */
+    #product h2 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    #product .features {
+      max-width: 800px;
+      margin: 1em auto;
+    }
+    #product .features li {
+      margin-bottom: 0.5em;
+      padding-left: 20px;
+      position: relative;
+    }
+    #product .features li:before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    #product .integrations {
+      max-width: 800px;
+      margin: 1em auto;
+    }
+    #product .integrations li {
+      margin-bottom: 0.5em;
+    }
+    #product .integrations li i {
+      margin-right: 8px;
+      color: var(--accent);
+    }
+    /* Architecture Section */
+    #architecture h2 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .architecture-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: space-between;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .architecture-grid .step {
+      flex: 1 1 200px;
+      padding: 20px;
+    }
+    .architecture-grid .step i {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+    .architecture-grid .step h3 {
+      font-size: 1.2em;
+      margin-bottom: 0.5em;
+    }
+    /* Pricing Section */
+    #pricing h2 {
+      text-align: center;
+      margin-bottom: 0.5em;
+    }
+    .billing-toggle {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .billing-toggle span {
+      vertical-align: middle;
+      font-size: 0.9em;
+      margin: 0 8px;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+      vertical-align: middle;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: .4s;
+    }
+    .slider:before {
+      content: "";
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #fff;
+      border-radius: 50%;
+      transition: .4s;
+    }
+    input:checked + .slider {
+      background-color: var(--accent);
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    /* Pricing plans grid */
+    .pricing-plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .plan {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .plan:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .plan h3 {
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    .plan .price {
+      font-size: 1.5em;
+      margin: 0.5em 0;
+      color: #333;
+    }
+    /* Hide yearly prices by default, show on toggle */
+    #pricing .price.yearly { display: none; }
+    #pricing.yearly .price.yearly { display: inline; }
+    #pricing.yearly .price.monthly { display: none; }
+    .plan ul {
+      text-align: left;
+      margin: 0 auto 1em auto;
+      max-width: 200px;
+    }
+    .plan ul li {
+      margin-bottom: 0.5em;
+    }
+    .plan ul li:before {
+      content: "•";
+      color: var(--accent);
+      margin-right: 5px;
+    }
+    .plan .btn {
+      margin-top: auto;
+      text-transform: uppercase;
+      font-size: 0.9em;
+    }
+    /* Industries Section */
+    #industries h2 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+    .industry i {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+    .industry h3 {
+      font-size: 1.2em;
+      margin-bottom: 0.5em;
+    }
+    /* Contact Section */
+    #contact h2 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: space-between;
+    }
+    .contact-details {
+      flex: 1 1 300px;
+    }
+    .contact-details p {
+      margin-bottom: 0.5em;
+    }
+    .contact-details p i {
+      margin-right: 8px;
+      color: var(--accent);
+    }
+    .contact-form {
+      flex: 1 1 300px;
+    }
+    .contact-form label {
+      display: block;
+      margin: 0.5em 0 0.2em;
+      font-weight: 600;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 5px rgba(33,150,243,0.3);
+    }
+    .contact-form button {
+      width: 100%;
+    }
+    /* Footer */
+    footer {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+    }
+    footer a {
+      color: #fff;
+    }
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--accent);
+        width: 200px;
+        padding: 10px;
+        border-radius: 4px;
+        display: none;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .nav-links li {
+        margin: 5px 0;
+      }
+      .nav-links a {
+        padding: 8px 0;
+      }
+      .menu-toggle {
+        display: inline-block;
+        color: #fff;
+      }
+      header .container {
+        justify-content: space-between;
+      }
+      .architecture-grid {
+        flex-direction: column;
+        text-align: left;
+      }
+      .architecture-grid .step {
+        flex: 1 1 auto;
+      }
+      .contact-form button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">nuclearSense</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#product">Product</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <!-- Home Section -->
+    <section id="home">
+      <div class="container">
+        <h1>Integrate. Monitor. Innovate.</h1>
+        <p>nuclearSense connects advanced sensors, data acquisition systems, and cloud analytics into a unified platform, delivering real-time insights for critical operations.</p>
+        <a href="#contact" class="btn">Get Started</a>
+      </div>
+    </section>
+    <!-- About Section -->
+    <section id="about">
+      <div class="container">
+        <h2>About Us</h2>
+        <p>nuclearSense is a cutting-edge technology company focused on bridging the gap between advanced sensor technology and actionable data insights. We offer an end-to-end Industrial IoT solution that empowers organizations to monitor and optimize their operations with ease.</p>
+        <p>Our team is dedicated to innovation in industrial automation and data analytics, providing a platform that is both powerful and user-friendly. With nuclearSense, businesses can harness real-time data to improve safety, efficiency, and decision-making.</p>
+        <div class="values">
+          <div>
+            <h3>Our Vision</h3>
+            <p>To shape a smarter, safer, and more efficient industrial world through data-driven insights and automation.</p>
+          </div>
+          <div>
+            <h3>Our Mission</h3>
+            <p>To empower industries with an integrated IoT platform that delivers real-time intelligence and drives proactive decision-making.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Product Section -->
+    <section id="product">
+      <div class="container">
+        <h2>Product</h2>
+        <p>nuclearSense offers a comprehensive IoT platform that seamlessly integrates hardware and software to monitor, analyze, and visualize data from critical assets. Our solution combines real-time data acquisition, cloud-based analytics, and intuitive dashboards to enable predictive maintenance and informed decision-making.</p>
+        <ul class="features">
+          <li><strong>Real-time Monitoring:</strong> Track sensor data continuously with instant alerts for anomalies.</li>
+          <li><strong>Predictive Analytics:</strong> Utilize machine learning to predict issues and schedule maintenance proactively.</li>
+          <li><strong>Seamless Integration:</strong> Connect effortlessly with third-party systems like ThingsBoard, Dewesoft, and Petasense.</li>
+          <li><strong>Scalable & Secure:</strong> Benefit from a cloud architecture that grows with your needs while keeping data protected.</li>
+        </ul>
+        <p>Our platform is built to work hand-in-hand with industry-leading tools and sensors:</p>
+        <ul class="integrations">
+          <li><i class="fas fa-check-circle"></i> <strong>ThingsBoard:</strong> An open-source IoT platform integrated for robust device management and data visualization.</li>
+          <li><i class="fas fa-check-circle"></i> <strong>Dewesoft:</strong> High-performance data acquisition systems ensure accurate and high-speed data collection from sensors.</li>
+          <li><i class="fas fa-check-circle"></i> <strong>Petasense:</strong> Wireless vibration sensors feed critical equipment health data into nuclearSense for predictive maintenance.</li>
+        </ul>
+      </div>
+    </section>
+    <!-- Architecture Section -->
+    <section id="architecture">
+      <div class="container">
+        <h2>Architecture</h2>
+        <p>The nuclearSense architecture is designed for flexibility and scalability, allowing seamless integration across the entire data pipeline:</p>
+        <div class="architecture-grid">
+          <div class="step">
+            <i class="fas fa-satellite"></i>
+            <h3>Sensors & Devices</h3>
+            <p>Connect a wide range of sensors (e.g., Petasense vibration sensors) and devices capturing critical data at the edge.</p>
+          </div>
+          <div class="step">
+            <i class="fas fa-network-wired"></i>
+            <h3>Data Acquisition</h3>
+            <p>Aggregate and preprocess data in real-time using Dewesoft and IoT gateways for reliable, high-speed data collection.</p>
+          </div>
+          <div class="step">
+            <i class="fas fa-cloud"></i>
+            <h3>Cloud Platform</h3>
+            <p>Stream data to the cloud via ThingsBoard, enabling scalable storage, processing, and device management with robust security.</p>
+          </div>
+          <div class="step">
+            <i class="fas fa-chart-line"></i>
+            <h3>Dashboard & Alerts</h3>
+            <p>Visualize insights on interactive dashboards and receive instant alerts anywhere, through web or mobile interfaces.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Pricing Section -->
+    <section id="pricing">
+      <div class="container">
+        <h2>Pricing</h2>
+        <div class="billing-toggle">
+          <span>Monthly</span>
+          <label class="switch">
+            <input type="checkbox" id="togglePricing">
+            <span class="slider"></span>
+          </label>
+          <span>Yearly <small>(save 15%)</small></span>
+        </div>
+        <div class="pricing-plans">
+          <div class="plan">
+            <h3>Basic</h3>
+            <p class="price"><span class="price monthly">$49/mo</span><span class="price yearly" style="display:none;">$499/yr</span></p>
+            <ul>
+              <li>Up to 50 sensors</li>
+              <li>Basic analytics & alerts</li>
+              <li>Email support</li>
+              <li>Core integrations</li>
+            </ul>
+            <a href="#contact" class="btn">Choose Plan</a>
+          </div>
+          <div class="plan">
+            <h3>Professional</h3>
+            <p class="price"><span class="price monthly">$99/mo</span><span class="price yearly" style="display:none;">$999/yr</span></p>
+            <ul>
+              <li>Up to 200 sensors</li>
+              <li>Advanced analytics</li>
+              <li>Priority support</li>
+              <li>All integrations</li>
+            </ul>
+            <a href="#contact" class="btn">Choose Plan</a>
+          </div>
+          <div class="plan">
+            <h3>Enterprise</h3>
+            <p class="price"><span class="price monthly">Custom</span><span class="price yearly" style="display:none;">Custom</span></p>
+            <ul>
+              <li>Unlimited sensors</li>
+              <li>Custom analytics & integrations</li>
+              <li>Dedicated support</li>
+              <li>On-premise options</li>
+            </ul>
+            <a href="#contact" class="btn">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Industries Section -->
+    <section id="industries">
+      <div class="container">
+        <h2>Industries</h2>
+        <p>nuclearSense delivers value across diverse sectors by providing tailored solutions for various industrial challenges:</p>
+        <div class="industries-grid">
+          <div class="industry">
+            <i class="fas fa-industry"></i>
+            <h3>Industrial Automation</h3>
+            <p>Enhance factory and production line monitoring with predictive maintenance to minimize downtime and improve quality.</p>
+          </div>
+          <div class="industry">
+            <i class="fas fa-solar-panel"></i>
+            <h3>Renewable Energy</h3>
+            <p>Monitor solar farms, wind turbines, and energy storage systems to optimize performance and ensure maximum uptime.</p>
+          </div>
+          <div class="industry">
+            <i class="fas fa-city"></i>
+            <h3>Smart Cities</h3>
+            <p>Integrate smart infrastructure sensors for traffic, environment, and utilities, making cities safer and more efficient.</p>
+          </div>
+          <div class="industry">
+            <i class="fas fa-atom"></i>
+            <h3>Research & Development</h3>
+            <p>Support scientific research and testing with high-fidelity data collection and analysis for innovative experiments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <h2>Contact</h2>
+        <div class="contact-container">
+          <div class="contact-details">
+            <p><i class="fas fa-map-marker-alt"></i> 1234 Innovation Drive, Tech City, USA</p>
+            <p><i class="fas fa-phone"></i> +1 (234) 567-8900</p>
+            <p><i class="fas fa-envelope"></i> contact@nuclearsense.com</p>
+            <p>Have questions or want to learn more? Fill out the form and our team will get in touch with you promptly.</p>
+          </div>
+          <div class="contact-form">
+            <form action="mailto:contact@nuclearsense.com" method="post" enctype="text/plain">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="Name" required />
+              
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="Email" required />
+              
+              <label for="message">Message:</label>
+              <textarea id="message" name="Message" rows="5" required></textarea>
+              
+              <button type="submit" class="btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 nuclearSense. All rights reserved.</p>
+  </footer>
+  <script>
+    // Mobile menu toggle for small screens
+    function toggleMenu() {
+      var navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('open');
+    }
+    // Pricing toggle (monthly/yearly)
+    document.getElementById('togglePricing').addEventListener('change', function() {
+      document.getElementById('pricing').classList.toggle('yearly');
+    });
+    // Reveal sections on scroll
+    const sections = document.querySelectorAll('section:not(#home)');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
