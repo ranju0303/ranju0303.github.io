@@ -1,130 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>nuclearSense - IoT Analytics Platform</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="nuclearSense - Integrating advanced sensors, IoT platforms, and data analytics for real-time insights." />
+  <meta name="keywords" content="nuclearSense, IoT, ThingsBoard, Dewesoft, Petasense, industrial IoT, predictive analytics, smart cities, renewable energy" />
+  <title>nuclearSense | Unified IoT Monitoring Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    .hero {
-      background: linear-gradient(135deg, #2196F3, #0D47A1);
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-    }
-    .section {
-      padding: 60px 20px;
-    }
-    .pricing-card {
-      border: 1px solid #ddd;
+    /* Base Styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; line-height: 1.6; background: #fff; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; margin-bottom: 0.5em; color: #111; }
+    p { margin-bottom: 1.5em; text-align: justify;text-justify: inter-word; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; padding: 0; }
+    :root { --accent: #2196F3; }
+    
+    /* Header */
+    header { position: sticky; top: 0; background: var(--accent); color: #fff; z-index: 1000; padding: 10px 20px; }
+    header .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5em; font-weight: 600; }
+    .nav-links { display: flex; align-items: center; }
+    .nav-links li { margin: 0 15px; }
+    .nav-links a { color: #fff; padding: 8px 5px; border-bottom: 2px solid transparent; transition: 0.3s; }
+    .nav-links a:hover { border-color: #fff; }
+    .menu-toggle { display: none; font-size: 1.5em; cursor: pointer; padding: 5px; }
+    
+    /* Sections */
+    section { padding: 60px 20px; }
+    
+    /* Hero Section */
+    #home { background: linear-gradient(135deg, var(--accent) 0%, #000 100%); color: #fff; text-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 20px; }
+    #home h1 { font-size: 4em; font-weight: bold; }
+    .btn { background: var(--accent); color: #fff; padding: 12px 30px; font-weight: 600; border: none; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+    .btn:hover { background: #1976d2; }
+    
+    /* About Section */
+    #about { text-align: center; max-width: 900px; margin: 0 auto; }
+    .values-container { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
+    .values-box {
+      flex: 1;
+      border: 2px solid var(--accent);
       padding: 20px;
       border-radius: 8px;
       text-align: center;
-      transition: transform 0.3s ease-in-out;
     }
-    .pricing-card:hover {
-      transform: translateY(-5px);
+    .values-box h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
     }
+
+    /* Unique Value Proposition Section */
+    #value-proposition { text-align: center; max-width: 900px; margin: 0 auto; }
+    .values-container { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
+    .values-box {
+      flex: 1;
+      border: 2px solid var(--accent);
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .values-box h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+     #value-proposition .content {
+      text-align: left;
+      padding: 20px;
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    #value-proposition ul { padding-left: 20px; }
+    #value-proposition li { margin-bottom: 10px; }
+    #value-proposition strong { color: var(--accent); }
+
+    /* Contact Section */
+
+    #contact{ text-align: center; max-width: 900px; margin: 0 auto; }
+    .values-container { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
+    .values-box {
+      flex: 1;
+      border: 2px solid var(--accent);
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .values-box h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    
+    #contact { background: #f9f9f9; padding: 80px 20px; }
+    .contact-container { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: center; }
+    .contact-details { flex: 1; text-align: left; }
+    .contact-details p { margin-bottom: 0.8em; font-size: 1.1em; }
+    .contact-details p i { margin-right: 10px; color: var(--accent); }
+    .contact-form { flex: 1; max-width: 400px; text-align: left; }
+    .contact-form label { display: block; margin: 0.5em 0 0.2em; font-weight: 600; }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 5px rgba(33,150,243,0.3);
+    }
+    .contact-form button {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.1em;
+    }
+    .contact-form button:hover {
+      background: #1976d2;
+    }
+
+
+
+    /* Footer */
+    footer { background: #111; color: #fff; text-align: center; padding: 20px; }
   </style>
 </head>
 <body>
-
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">nuclearSense</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#product">Product</a></li>
-        <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
+  <header>
+    <div class="container">
+      <div class="logo">nuclearSense</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#value-proposition">Value Proposition</a></li>
+          <li><a href="#product">Product</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+      </nav>
     </div>
-  </div>
-</nav>
-
-<!-- Hero Section -->
-<header class="hero">
-  <h1>nuclearSense</h1>
-  <p>Where Smart Sensing Meets Predictive Intelligence</p>
-  <a href="#contact" class="btn btn-light">Get Started</a>
-</header>
-
-<!-- About Section -->
-<section id="about" class="section">
-  <div class="container">
-    <h2 class="text-center">About Us</h2>
-    <p class="text-center">nuclearSense integrates IoT connectivity, high-precision data acquisition, and advanced analytics for real-time insights.</p>
-  </div>
-</section>
-
-<!-- Product Section -->
-<section id="product" class="section bg-light">
-  <div class="container">
-    <h2 class="text-center">Our Product</h2>
-    <ul>
-      <li>Seamless IoT connectivity using ThingsBoard</li>
-      <li>High-precision data acquisition with Dewesoft</li>
-      <li>AI-driven predictive maintenance inspired by Petasense</li>
-      <li>Real-time analytics and visualization dashboards</li>
-    </ul>
-  </div>
-</section>
-
-<!-- Pricing Section -->
-<section id="pricing" class="section">
-  <div class="container">
-    <h2 class="text-center">Pricing</h2>
-    <div class="row text-center">
-      <div class="col-md-4">
-        <div class="pricing-card">
-          <h3>Starter</h3>
-          <p>$99/month</p>
-          <p>Basic IoT monitoring & analytics</p>
-          <a href="#contact" class="btn btn-primary">Get Started</a>
+  </header>
+  <main>
+    <section id="home">
+      <div class="container">
+        <h1>Integrate. Monitor. Innovate.</h1>
+        <p>nuclearSense connects advanced sensors, data acquisition systems, and cloud analytics into a unified platform, delivering real-time insights for critical operations.</p>
+        <a href="#contact" class="btn">Get Started</a>
+      </div>
+    </section>
+    <section id="about">
+      <div class="container">
+        <h2>About Us</h2>
+        <p>NuclearSense represents our unwavering commitment to harnessing the core of IoT technology—transforming raw, elemental data into powerful, actionable Intelligence that reshape the future. Our brand embodies strength and impact, reflecting how our advance IOT platform drive meaningful change through precise monitoring and cutting-edge analytics. Just as the nucleus forms the center of a cell, NuclearSense taps into the heart of your data, delivering the essential intelligence you need to innovate, excel, and pave the way for a smarter, more sustainable tomorrow.</p>
+        <div class="values-container">
+          <div class="values-box">
+            <h3>Our Vision</h3>
+            <p>At nuclearSense, our vision is to empower organizations globally by unlocking the full potential of IoT data. We aim to be the leading platform that transforms raw data into actionable intelligence—enabling smarter decisions, fostering innovation, and paving the way for reliable and  sustainable futures.</p>
+          </div>
+          <div class="values-box">
+            <h3>Our Mission</h3>
+            <p>At nuclearSense, our mission is to revolutionize the way organizations harness IoT data. We provide an analytics-driven platform that enables seamless device connectivity, comprehensive data collection, and sophisticated processing to transform raw data into actionable intelligence. We are committed to empowering businesses to innovate, optimize operations, and achieve sustainable growth, all while enhancing safety and reliability in their operations.</p>
+          </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="pricing-card">
-          <h3>Professional</h3>
-          <p>$299/month</p>
-          <p>Advanced analytics & predictive maintenance</p>
-          <a href="#contact" class="btn btn-primary">Get Started</a>
+    </section>
+    <section id="value-proposition">
+      <div class="container">
+        <h2>Unique Value Proposition</h2>
+        <div class="content">
+          <p>At nuclearSense, our platform goes beyond simple device connectivity and data visualization. We deliver a comprehensive, analytics-driven solution that transforms raw IoT data into actionable intelligence.  Here's what sets us apart:</p>
+          <ul>
+            <li><strong>Advanced Analytics:</strong> While others offer basic data management and visualization, we harness cutting-edge analytics and deep neural network strategies. This enables predictive and prescriptive insights, allowing you to foresee potential issues and optimize operations proactively.</li>
+            <li><strong>Actionable Intelligence:</strong>We don’t just display data—we provide clear, actionable insights. Our platform turns complex datasets into strategic recommendations that help drive better decision-making and continuous improvement.</li>
+            <li><strong>Seamless Integration:</strong>Our solution easily integrates with existing sensing devices, enabling smooth and effortless device connectivity and data management without the need for hardware overhauls.</li>
+            <li><strong>Future-Proof Innovation:</strong>With a focus on scalable, forward-thinking technology, nuclearSense empowers businesses to stay ahead in an ever-evolving digital landscape, ensuring long-term efficiency and resilience.</li>
+          </ul>
+          <p>In summary, nuclearSense stands out by combining robust IoT connectivity with powerful, advanced analytics, delivering a platform that not only visualizes data but transforms it into a strategic asset for your organization.</p>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="pricing-card">
-          <h3>Enterprise</h3>
-          <p>Custom Pricing</p>
-          <p>Full customization & premium support</p>
-          <a href="#contact" class="btn btn-primary">Contact Us</a>
+    </section>
+    <section id="contact">
+      <div class="container">
+        <h2>Contact</h2>
+        <div class="contact-container">
+          <div class="contact-details">
+            <p><i class="fas fa-map-marker-alt"></i> Tamil Nadu, India </p>
+            <p><i class="fas fa-phone"></i> +91 9955329336</p>
+            <p><i class="fas fa-envelope"></i> Hello@nuclearsense.com</p>
+            <p>Have questions or want to learn more? Fill out the form and our team will get in touch with you promptly.</p>
+          </div>
+          <div class="contact-form">
+            <form action="mailto:contact@nuclearsense.com" method="post" enctype="text/plain">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="Name" required />
+              
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="Email" required />
+              
+              <label for="message">Message:</label>
+              <textarea id="message" name="Message" rows="5" required></textarea>
+              
+              <button type="submit" class="btn">Send Message</button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="section bg-light">
-  <div class="container">
-    <h2 class="text-center">Contact Us</h2>
-    <p class="text-center">Reach out to us to learn more about nuclearSense.</p>
-    <p class="text-center"><strong>Email:</strong> hello@nuclearsense.com</p>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer class="bg-dark text-white text-center p-3">
-  <p>&copy; 2025 nuclearSense. All rights reserved.</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 nuclearSense. All rights reserved.</p>
+  </footer>
 </body>
 </html>
